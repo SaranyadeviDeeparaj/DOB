@@ -67,11 +67,17 @@
                 let minDiff=Math.floor(secDiff/60);
                 let hrDiff=Math.floor(minDiff/60);
                 let dayDiff=Math.floor(hrDiff/24);
+                let monthDiff=getMonthValue(inputDate,currentDate);
+                let yrDiff=getYearValue(inputDate,currentDate);
+
 
                 document.getElementById("display-data").innerHTML=`
                 Inputvalue: ${input} <br>
                 FormattedDate:${inputDate}<br>
                 CurrentDate:${currentDate}<br>
+
+                Year Difference:${yrDiff}<br>
+                Month Difference:${monthDiff}<br>
                 Day Difference:${dayDiff}<br>
                 Hour Difference:${hrDiff}<br>
                 Minute Difference:${minDiff}<br>
@@ -81,6 +87,17 @@
             else
             {
                 document.getElementById("display-data").innerHTML=`Select Valid Date`;
+            }
+
+            function getMonthValue(value1,value2)
+            {
+                let year=getYearValue(value1,value2);
+                let month=year*12+value2.getMonth()-value1.getMonth();
+                return month;
+            }
+            function getYearValue(value1,value2)
+            {
+                return value2.getFullYear()-value1.getFullYear();
             }
                 
         }
