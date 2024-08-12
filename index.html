@@ -5,12 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>DOB Calculation</title>
     <style>
-        body{
+        body
+        {
             text-align:center;
         }
 
         .container{
             padding-top: 25px;
+           
         }
         .form-input{
             text-align: center;
@@ -36,6 +38,9 @@
         hr{
             border-top: 1px dashed;
         }
+        .display-data{
+            text-align:left;
+        }
     </style>
 </head>
 <body>
@@ -46,7 +51,7 @@
         </div>
         <button class="btn" id="btn" onclick="calculate()">Calculate Date</button>
         <hr/>
-        <div id="display-data"></div>
+        <div id="display-data" class="display-data"></div>
     </div>  
     <script>
         function calculate()
@@ -56,10 +61,26 @@
             {
                 let inputDate=new Date(input);
                 let currentDate=new Date();
+
+                let milliSecDiff=parseInt(currentDate.getTime())-parseInt(inputDate.getTime());
+                let secDiff=Math.floor(milliSecDiff/1000);
+                let minDiff=Math.floor(secDiff/60);
+                let hrDiff=Math.floor(minDiff/60);
+                let dayDiff=Math.floor(hrDiff/24);
+
                 document.getElementById("display-data").innerHTML=`
                 Inputvalue: ${input} <br>
                 FormattedDate:${inputDate}<br>
-                CurrentDate:${currentDate}`;
+                CurrentDate:${currentDate}<br>
+                Day Difference:${dayDiff}<br>
+                Hour Difference:${hrDiff}<br>
+                Minute Difference:${minDiff}<br>
+                Second Difference:${secDiff}<br>
+                MilliSeconds Difference:${milliSecDiff}`;
+            }
+            else
+            {
+                document.getElementById("display-data").innerHTML=`Select Valid Date`;
             }
                 
         }
